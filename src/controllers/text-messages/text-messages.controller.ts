@@ -6,7 +6,6 @@ export class TextMessagesController {
   constructor(private chatGateway: ChatGateway) {}
   @Post()
   async create(@Req() req) {
-    console.log(req.body);
     this.chatGateway.handleTextMessageReceived(req.body);
   }
 }

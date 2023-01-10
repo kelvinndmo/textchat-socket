@@ -19,12 +19,12 @@ export class ChatGateway {
   constructor(private apiService: ApiServiceService) {}
 
   @SubscribeMessage('new-agent-message-sent')
-  async handleNewAgentMessageSent(@MessageBody() messageData: any) {
-    this.apiService.sendTextMessage(messageData).subscribe((response) => {
+  async handleNewAgentMessageSent(@MessageBody() data: any) {
+    this.apiService.sendTextMessage(data).subscribe((response) => {
       this.server.emit('new-agent-message-sucess', {
         ...response.data,
-        sessionToken: messageData.sessionToken,
-        messageText: messageData.MessageText,
+        sessionToken: data.messageData.sessionToken,
+        messageText: data.messageData.MessageText,
       });
     });
   }
